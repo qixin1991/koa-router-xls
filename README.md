@@ -10,13 +10,17 @@ npm install koa-router-xls
 
 ## Usage
 
+**app.js**
+
 ```
 "use strict";
 const Koa = require('koa'),
       app = new Koa(),
       xls = require('koa-router-xls'),
+      formParser = require('koa-router-form-parser'),
       userRouter = require('./routes/user.js');
 
+app.use(formParser());
 app.use(xls());
 
 app.use(userRouter.routes());
@@ -36,6 +40,8 @@ router.get('/download', async ctx => {
     ctx.downloadXLS(data,'mydownload-xls');
 });
 
+// NOTE: this method dependency on `koa-router-form-parse` and 
+//  it'll be automatic installed when you install `koa-router-xls`
 router.post('/uploadxls', async ctx => {
     var filePath = await ctx.formParse(); // ctx.formParse() is a extend middleware named `koa-router-form-parser` of koa-router@next
     var data = ctx.xlsToJson(filePath);
