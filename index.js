@@ -1,4 +1,4 @@
-var json2xls = require('json-to-excel'),
+let json2xls = require('json-to-excel'),
     fs = require('fs'),
     xls2json = require('my-xls-to-json');
 
@@ -17,16 +17,16 @@ const date2String = (date, pattern) => {
 module.exports = () => {
     return async (ctx, next) => {
         ctx.downloadXLS = (jsonData, fileName) => {
-            var xls = json2xls(jsonData);
+            let xls = json2xls(jsonData);
             ctx.set('Content-Type', 'application/vnd.openxmlformats');
-            var filename = encodeURIComponent((fileName || 'download ') + date2String(new Date(), 'yyyy-mm-dd HH-MM') + ".xlsx");
+            let filename = encodeURIComponent((fileName || 'download ') + date2String(new Date(), 'yyyy-mm-dd HH-MM') + ".xlsx");
             ctx.set("Content-Disposition", "attachment; filename=" + filename);
-            var buffer = new Buffer(xls, 'binary');
+            let buffer = new Buffer(xls, 'binary');
             ctx.body = buffer;
         };
 
         ctx.xlsToJson = (filePath) => {
-            var data;
+            let data;
             xls2json(filePath, (err, output) => {
                 data = output[Object.keys(output)[0]];   // convert the first worksheet. others do'nt read.(if you need, fork this middleware from github and do what you want.)
                 fs.unlink(filePath, (err) => { }); // delete the tmp file.

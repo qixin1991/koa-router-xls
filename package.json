@@ -1,6 +1,6 @@
 {
   "name": "koa-router-xls",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "koa router middleware. excel 2 json. download json data to excel file.",
   "main": "index.js",
   "scripts": {

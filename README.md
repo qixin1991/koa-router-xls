@@ -25,7 +25,7 @@ app.use(xls());
 
 app.use(userRouter.routes());
 
-var port = 3000;
+let port = 3000;
 app.listen(port, function () {
   console.log(` ---> Server running on port: ${port}`);
 });
@@ -36,15 +36,15 @@ app.listen(port, function () {
 ```
 "use strict";
 router.get('/download', async ctx => {
-    var data = [{ name: "brain", age: 24 }, { name: "无忌", age: 26 }];
+    let data = [{ name: "brain", age: 24 }, { name: "无忌", age: 26 }];
     ctx.downloadXLS(data,'mydownload-xls');
 });
 
 // NOTE: this method dependency on `koa-router-form-parse` and 
 //  it'll be automatic installed when you install `koa-router-xls`
 router.post('/uploadxls', async ctx => {
-    var filePath = await ctx.formParse(); // ctx.formParse() is a extend middleware named `koa-router-form-parser` of koa-router@next
-    var data = ctx.xlsToJson(filePath);
+    let filePath = await ctx.formParse(); // ctx.formParse() is a extend middleware named `koa-router-form-parser` of koa-router@next
+    let data = ctx.xlsToJson(filePath);
     ctx.body = data;
 });
 ```
