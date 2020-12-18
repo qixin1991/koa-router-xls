@@ -21,7 +21,7 @@ module.exports = () => {
             ctx.set('Content-Type', 'application/vnd.openxmlformats');
             let filename = encodeURIComponent((fileName || 'download ') + date2String(new Date(), 'yyyy-mm-dd HH-MM') + ".xlsx");
             ctx.set("Content-Disposition", "attachment; filename=" + filename);
-            let buffer = new Buffer(xls, 'binary');
+            let buffer = Buffer.from(xls, 'binary');
             ctx.body = buffer;
         };
 
